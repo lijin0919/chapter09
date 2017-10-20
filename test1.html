@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        var cityList = new Array();
+        cityList['陕西省'] = ['西安市', '汉中市'];
+        cityList['山西省'] = ['太原市', '运城'];
+
+        function allCity() {
+            var p = document.getElementById("province"); //获取省份列表
+            for (var i in cityList) { //循环遍历cityList的属性
+                p.add(new Option(i, i), null);
+                //省份列表的末尾增加一个<option>选项，text：i，value：i
+            }
+        }
+
+        //取得op值
+        function getvalue() {
+            var p = document.getElementById("province"); //获取省份列表
+            var index=p.selectedIndex ;//拿到选中的索引
+
+            alert(p.options[index].value);
+        }
+
+
+        function getop() {
+            var opv = document.getElementById("province").value
+            alert(opv);
+        }
+        //for...in 语句用于对数组或者对象的属性进行循环操作。
+        function forIn() {
+            for(var i in cityList){
+                alert(i);
+            }
+        }
+
+
+        function change() {
+            var pVal = document.getElementById("province").value; //获取省份列表中的值
+            var c = document.getElementById("city"); //获取城市列表
+            c.options.length = 0; //清楚当前城市列表中的值
+            for (var i in cityList) { //循环遍历cityList的属性
+                if (i == pVal) { //判断当i等于省份列表中的值时;
+                    for (var j in cityList[i]) { //循环遍历cityList[i]的属性
+                        c.add(new Option(cityList[i][j], cityList[i][j]), null)
+                        //城市列表的末尾增加一个<option>选项，text：cityList[i][j]，value：cityList[i][j]
+                    }
+                    break;
+                }
+            }
+        }
+
+
+        window.onload = allCity;
+    </script>
+</head>
+<body>
+<div>
+    <select id="province" onchange="change()">
+        <option>--请选择省份--</option>
+    </select>
+</div>
+
+<div>
+    <select id="city">
+        <option>--请选择市--</option>
+    </select>
+</div>
+<button onclick="getop()">弹出value</button>
+<button onclick="forIn()">forin</button>
+</body>
+</html>

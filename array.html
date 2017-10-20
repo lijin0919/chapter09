@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style type="text/css">
+    .cascade { float: left; width: 120px; height: 30px; }
+    .cascade select { width: 100%; height: 100%; }
+</style>
+
+<div class="cascade">
+    <select id="province" onchange="change();">
+        <option>--请选择省份--</option>
+    </select>
+</div>
+
+<div class="cascade">
+    <select id="city">
+        <option>--请选择市--</option>
+    </select>
+</div>
+
+<script type="text/javascript">
+    //首先建立一个你需要省，和它对应的市的数组，如下：
+    var cityList = new Array();
+    cityList['北京市'] = ['朝阳区', '东城区', '西城区', '海淀区', '宣武区', '丰台区', '怀柔', '延庆', '房山'];
+    cityList['上海市'] = ['宝山区', '长宁区', '丰贤区', '虹口区', '黄浦区', '青浦区', '南汇区', '徐汇区', '卢湾区'];
+    cityList['广州省'] = ['广州市', '惠州市', '汕头市', '珠海市', '佛山市', '中山市', '东莞市'];
+    cityList['深圳市'] = ['福田区', '罗湖区', '盐田区', '宝安区', '龙岗区', '南山区', '深圳周边'];
+    cityList['重庆市'] = ['俞中区', '南岸区', '江北区', '沙坪坝区', '九龙坡区', '渝北区', '大渡口区', '北碚区'];
+    cityList['天津市'] = ['和平区', '河西区', '南开区', '河北区', '河东区', '红桥区', '塘古区', '开发区'];
+    cityList['江苏省'] = ['南京市', '苏州市', '无锡市'];
+    cityList['浙江省'] = ['杭州市', '宁波市', '温州市'];
+    cityList['四川省'] = ['四川省', '成都市'];
+    cityList['海南省'] = ['海口市'];
+    cityList['福建省'] = ['福州市', '厦门市', '泉州市', '漳州市'];
+    cityList['山东省'] = ['济南市', '青岛市', '烟台市'];
+    cityList['江西省'] = ['江西省', '南昌市'];
+    cityList['广西省'] = ['柳州市', '南宁市'];
+    cityList['安徽省'] = ['安徽省', '合肥市'];
+    cityList['河北省'] = ['邯郸市', '石家庄市'];
+    cityList['河南省'] = ['郑州市', '洛阳市'];
+    cityList['湖北省'] = ['武汉市', '宜昌市'];
+    cityList['湖南省'] = ['湖南省', '长沙市'];
+    cityList['陕西省'] = ['陕西省', '西安市'];
+    cityList['山西省'] = ['山西省', '太原市'];
+    cityList['黑龙江省'] = ['黑龙江省', '哈尔滨市'];
+    cityList['其他'] = ['其他'];
+
+    /**科普小知识
+     *Option(text,value)  返回包含下拉列表框中的所有选项的一个数组，text==选项文本值；value==文本值
+     *add(new,old)  用于向<select>中添加一个<option>标签，
+     new表示新添加到old之前的Option对象，
+     如果old为null，那则直接添加到<select>所有选项的末尾
+     *for(in)  循环遍历对象的属性  ，例：for(var i in cityList)
+     这里的i==cityList的属性，就是省份名称
+     例：for (var j in city[i])
+     这里的j==cityList[i]的属性，cityList中下表为i的属性的属性，就是每个城市的index（下标）
+     **/
+
+    //然后写一个方法把这一大长串的数组给他调到你需要的地方去
+    function change() {
+        var pVal = document.getElementById("province").value; //获取省份列表中的值
+        var c = document.getElementById("city"); //获取城市列表
+        c.options.length = 0; //清楚当前城市列表中的值
+        for (var i in cityList) { //循环遍历cityList的属性
+                if (i == pVal) { //判断当i等于省份列表中的值时;
+                    for (var j in cityList[i]) { //循环遍历cityList[i]的属性
+                        c.add(new Option(cityList[i][j], cityList[i][j]), null)
+                        //城市列表的末尾增加一个<option>选项，text：cityList[i][j]，value：cityList[i][j]
+                    }
+                    break;
+                }
+        }
+    }
+
+    function allCity() {
+        var p = document.getElementById("province"); //获取省份列表
+        for (var i in cityList) { //循环遍历cityList的属性
+            p.add(new Option(i, i), null);
+            //省份列表的末尾增加一个<option>选项，text：i，value：i
+        }
+    }
+    window.onload = allCity;
+
+
+</script>
+
+</body>
+</html>
