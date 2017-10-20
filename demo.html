@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function getrows() {
+            //找到table对象
+            var mTable = document.getElementById("table1");
+            var mRows = mTable.rows;
+            mTable.insertRow(4);
+//            mTable.deleteRow(3);
+            alert(mRows.length);
+        }
+
+        //插入一行（空《tr》标签）
+        function insertRow() {
+            //找到table对象
+            var mTable = document.getElementById("table1");
+
+            mTable.insertRow(-1);//添加一行
+            //里边的整数代表要添加到哪一行的上边，第一行从0开始记
+        }
+
+        function deleteRow() {
+            //找到table对象
+            var mTable = document.getElementById("table1");
+            mTable.deleteRow(3);
+
+        }
+
+        //创建标题
+        function createCaption() {
+            //找到table对象
+            var mTable = document.getElementById("table1");
+            var mCaption = mTable.createCaption();//获得<caption>标签
+            mCaption.innerHTML = "这是表格标题";
+
+        }
+
+        function insertCellInRow() {
+            //找到table对象
+            var mTable = document.getElementById("table1");
+           var firstRow = mTable.rows[0];
+           //在行制定的位置插入一个空的<td>标签
+            firstRow.insertCell(6);
+        }
+
+    </script>
+</head>
+<body>
+<table id="table1" border="1" width="300px">
+    <tr>
+        <td>1.1</td>
+        <td>1.2</td>
+        <td>1.3</td>
+    </tr>
+    <tr>
+        <td>2.1</td>
+        <td>2.2</td>
+        <td>2.3</td>
+    </tr>
+    <tr>
+        <td>3.1</td>
+        <td>3.2</td>
+        <td>3.3</td>
+    </tr>
+</table>
+<button onclick="getrows()">点击获取table的行数</button>
+<button onclick="insertRow()">点击添加行</button>
+<button onclick="deleteRow()">点击删除行</button>
+<button onclick="createCaption()">创建标题</button>
+<button onclick="insertCellInRow()">创建单元格</button>
+</body>
+</html>
